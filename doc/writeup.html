@@ -257,7 +257,7 @@ Using this exploit will allow us to write our 2nd exploit: the ability to transm
         dec hl <br>
         inc bc <br>
         dec hl <br>
-        inc hl <br>
+        inc [hl] <br>
         ret    <br>
     </code>
 </div>
@@ -327,17 +327,17 @@ Now we can set up the code that will allow us to conveniently write to the PC it
     <code>
         ; get item count and reset it to 0 <br>
         dec hl                   <br>
-        ld a, (hl)               <br>
-        ld (hl), 0               <br>
+        ld a, [hl]               <br>
+        ld [hl], 0               <br>
         <br>
         ; store data byte in PC <br>
         ld bc, $d53b             <br>
-        ld (bc), a               <br>
+        ld [bc], a               <br>
         <br>
         ; update PC address by modifying <br>
         ; the above "ld bc, $d53b" line  <br>
         ld l, $27                <br>
-        inc (hl)                 <br>
+        inc [hl]                 <br>
         <br>
         ret                      <br>
     </code>
